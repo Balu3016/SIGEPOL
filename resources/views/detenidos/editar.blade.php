@@ -137,14 +137,11 @@
         {{ $detenido->sexo == 'MASCULINO' ? 'selected' : '' }}>
         MASCULINO
     </option>
-
     <option value="FEMENINO"
         {{ $detenido->sexo == 'FEMENINO' ? 'selected' : '' }}>
         FEMENINO
     </option>
-
 </select>
-
                     </div>
 
                     <!-- VEHICULO -->

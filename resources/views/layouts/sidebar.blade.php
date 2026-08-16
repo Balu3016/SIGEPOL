@@ -108,58 +108,61 @@ class="sidebar-sigepol">
         </li>
 
         <!-- DETENIDOS -->
-        <li class="nav-item mt-2">
+<li class="nav-item mt-2">
 
-            <button
-                @click="openDetenidos = !openDetenidos"
-                class="nav-link text-white d-flex justify-content-between align-items-center w-100 bg-transparent border-0">
+    <button
+        @click="openDetenidos = !openDetenidos"
+        class="nav-link text-white d-flex justify-content-between align-items-center w-100 bg-transparent border-0">
 
-                <span>🚔 Detenidos</span>
+        <span>🚔 Detenidos</span>
 
-                <span :class="{'rotate-180': openDetenidos}"
-                      class="arrow">
+        <span
+            :class="{'rotate-180': openDetenidos}"
+            class="arrow">
 
-                    ▼
+            ▼
 
-                </span>
+        </span>
 
-            </button>
+    </button>
 
-            <div x-show="openDetenidos" x-transition>
+    <div x-show="openDetenidos" x-transition>
 
-                <ul class="nav flex-column ms-3">
+        <ul class="nav flex-column ms-3">
 
-                    <li class="nav-item">
+            @if(Auth::user()->role == 'admin' || Auth::user()->role == 'elemento')
 
-                        <a href="/detenidos"
-                           class="nav-link {{ request()->is('detenidos') ? 'text-warning' : 'text-white' }}">
+                <!-- NUEVO DETENIDO -->
+                <li class="nav-item">
 
-                            ▸ Ver Detenidos
+                    <a href="{{ route('detenidos.create') }}"
+                       class="nav-link {{ request()->routeIs('detenidos.create') ? 'text-warning' : 'text-white' }}">
 
-                        </a>
+                        ▸ Nuevo Detenido
 
-                    </li>
+                    </a>
 
-                    @if(Auth::user()->role == 'admin' || Auth::user()->role == 'elemento')
+                </li>
 
-                    <li class="nav-item">
+                <!-- LISTA -->
+                <li class="nav-item">
 
-                        <a href="/detenidos/crear"
-                           class="nav-link {{ request()->is('detenidos/crear') ? 'text-warning' : 'text-white' }}">
+                    <a href="{{ route('detenidos.index') }}"
+                       class="nav-link {{ request()->routeIs('detenidos.index') ? 'text-warning' : 'text-white' }}">
 
-                            ▸ Nuevo Detenido
+                        ▸ Lista de Detenidos
 
-                        </a>
+                    </a>
 
-                    </li>
+                </li>
 
-                    @endif
+            @endif
 
-                </ul>
+        </ul>
 
-            </div>
+    </div>
 
-        </li>
+</li>
 
         <!-- IMPORTAR -->
         @if(Auth::user()->role == 'admin')
